@@ -19,8 +19,8 @@ BOOLEANLITERAL
     ;
     
 
-LPAR            : '(';
-RPAR            : ')';
+
+
 ASSIGN          : '=';
 GT              : '>';
 LT              : '<';
@@ -48,8 +48,6 @@ SINGLEQUOTE     : '\'';
 DOULEQUOTE : '"';
 NEWLINE  : [\r\n]+ ;
 COLON : ':';
-LBRA: '{';
-RBRA: '}';
 SLASH: '/';
 
 expression :
@@ -60,7 +58,7 @@ expression :
     |   expression op=(EQUAL | NOTEQUAL) expression        #EQUALExpr
     |   expression op=(MUL | DIV | MOD) expression         #MULDIVExpr 
     |   expression op=(ADD | SUB) expression               #ADDSUBExpr
-    |   (LPAR expression RPAR)                             #PARExpr
+    |   ('(' expression ')')                             #PARExpr
     ; 
 
 
@@ -72,11 +70,11 @@ literal :
 	|   BOOLEANLITERAL      
     ;	
 
-prog: (questionnaire NEWLINE*);
+prog: (questionnaire  NEWLINE*)*;
 
 
 questionnaire : 'form'  variable '{'  questions  '}';
-questions: (nonifquestionlist | ifquestionlist)*;
+questions: '('nonifquestionlist | ifquestionlist')'*;
 
 nonifquestionlist : questionlist;
 
@@ -92,7 +90,7 @@ STRING : '"' ( '\\' [\\"] | ~[\\"\r\n] )* '"';
 questionStatement 
        : STRING ;
 
-type : primitiveType  (LPAR expression RPAR)?  ;
+type : primitiveType (' (' expression ')')?  ;
 
 primitiveType : PRIMITIVETYPE;
 
