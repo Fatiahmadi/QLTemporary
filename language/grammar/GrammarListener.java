@@ -154,16 +154,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitQuestionnaire(GrammarParser.QuestionnaireContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#questions}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuestions(GrammarParser.QuestionsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#questions}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuestions(GrammarParser.QuestionsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#nonifquestionlist}.
 	 * @param ctx the parse tree
 	 */
@@ -193,6 +183,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfquestionlist(GrammarParser.IfquestionlistContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#ifnested}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfnested(GrammarParser.IfnestedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#ifnested}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfnested(GrammarParser.IfnestedContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#question}.
 	 * @param ctx the parse tree

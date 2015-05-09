@@ -64,15 +64,15 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitQuestion(@NotNull GrammarParser.QuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#questions}.
+	 * Enter a parse tree produced by {@link GrammarParser#ifnested}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuestions(@NotNull GrammarParser.QuestionsContext ctx);
+	void enterIfnested(@NotNull GrammarParser.IfnestedContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#questions}.
+	 * Exit a parse tree produced by {@link GrammarParser#ifnested}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuestions(@NotNull GrammarParser.QuestionsContext ctx);
+	void exitIfnested(@NotNull GrammarParser.IfnestedContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ORExpr}
 	 * labeled alternative in {@link GrammarParser#expression}.
@@ -97,16 +97,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCOMPExpr(@NotNull GrammarParser.COMPExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#questionlist}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuestionlist(@NotNull GrammarParser.QuestionlistContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#questionlist}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuestionlist(@NotNull GrammarParser.QuestionlistContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#type}.
 	 * @param ctx the parse tree

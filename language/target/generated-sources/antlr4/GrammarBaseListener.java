@@ -76,13 +76,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuestions(@NotNull GrammarParser.QuestionsContext ctx) { }
+	@Override public void enterIfnested(@NotNull GrammarParser.IfnestedContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuestions(@NotNull GrammarParser.QuestionsContext ctx) { }
+	@Override public void exitIfnested(@NotNull GrammarParser.IfnestedContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -107,18 +107,6 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCOMPExpr(@NotNull GrammarParser.COMPExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterQuestionlist(@NotNull GrammarParser.QuestionlistContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitQuestionlist(@NotNull GrammarParser.QuestionlistContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

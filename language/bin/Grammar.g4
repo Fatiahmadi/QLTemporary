@@ -10,7 +10,7 @@ variable : ID;
 
 INT : DIGIT+; // check how to implement minus sign
 
-IFTAG : 'if';
+
 
 
 BOOLEANLITERAL
@@ -18,32 +18,11 @@ BOOLEANLITERAL
     |   'false'
     ;
     
-
-
-
 ASSIGN          : '=';
-GT              : '>';
-LT              : '<';
-BANG            : '!';
-TILDE           : '~';
 QUESTION        : '?';
-EQUAL           : '==';
-LE              : '<=';
-GE              : '>=';
-NOTEQUAL        : '!=';
-AND             : '&&';
-OR              : '||';
 INC             : '++';
 DEC             : '--';
-ADD             : '+';
 SUB             : '-';
-MUL             : '*';
-DIV             : '/';
-BITAND          : '&';
-BITOR           : '|';
-CARET           : '^';
-MOD             : '%';
-SINGLEQUOTE     : '\'';
 
 DOULEQUOTE : '"';
 NEWLINE  : [\r\n]+ ;
@@ -52,12 +31,12 @@ SLASH: '/';
 
 expression :
     literal                                             #LITExpr
-    |   expression op=AND expression                       #ANDExpr
-    |   expression op=OR expression                        #ORExpr
-    |   expression op=(GE | LE | GT | LT ) expression      #COMPExpr
-    |   expression op=(EQUAL | NOTEQUAL) expression        #EQUALExpr
-    |   expression op=(MUL | DIV | MOD) expression         #MULDIVExpr 
-    |   expression op=(ADD | SUB) expression               #ADDSUBExpr
+    |   expression op='&&' expression                       #ANDExpr
+    |   expression op='||' expression                        #ORExpr
+    |   expression op=('>='|'=<'|'>' |'<' ) expression      #COMPExpr
+    |   expression op=('==' |'!=') expression        #EQUALExpr
+    |   expression op=('*' |'/'|'%') expression         #MULDIVExpr 
+    |   expression op=('+' | '-') expression               #ADDSUBExpr
     |   ('(' expression ')')                             #PARExpr
     ; 
 
@@ -65,44 +44,30 @@ expression :
 myexpr : (expression NEWLINE)*;
 
 literal :
-    | 	INT            
-	|   variable        
+    | 	INT 
+    |   variable                   
 	|   BOOLEANLITERAL      
     ;	
-
 prog: (questionnaire  NEWLINE*)*;
+questionnaire : 'form'  variable '{' ( ifquestionlist|nonifquestionlist) *'}';
+nonifquestionlist : ( question)+ ;
 
-
-questionnaire : 'form'  variable '{'  questions  '}';
-questions: '('nonifquestionlist | ifquestionlist')'*;
-
-nonifquestionlist : questionlist;
-
-questionlist : ( question )+;
-
-
-ifquestionlist : IFTAG  '('  variable  ')'   '{'  questionlist  '}';
-
-question :  variable  ':'  questionStatement  type;
-
-STRING : '"' ( '\\' [\\"] | ~[\\"\r\n] )* '"';
+ifquestionlist : 'if'  '('  variable  ')'   '{' ( question NEWLINE*)+  '}';
+ ifnested : (ifquestionlist)+;
+question :  variable  ':'  questionStatement  type ;
 
 questionStatement 
        : STRING ;
+type : primitiveType;
 
-type : primitiveType (' (' expression ')')?  ;
-
-primitiveType : PRIMITIVETYPE;
-
-   
-PRIMITIVETYPE :   
+primitiveType : 
             'boolean'
         |   'string'
         |   'integer'
         ;
+STRING : '"' ( '\\' [\\"] | ~[\\"\r\n] )* '"';
         
 WS  :  [ \t\r\n]+ -> skip;
-
 
 COMMENT
     :   '/*' .*? '*/' -> skip
