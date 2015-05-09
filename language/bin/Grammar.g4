@@ -1,17 +1,6 @@
 grammar Grammar;
 
-
-LOWERCASE : [a-z]; 
-UPPERCASE :  [A-Z]; 
-DIGIT : [0-9];
-
-ID : (LOWERCASE | UPPERCASE) (LOWERCASE | UPPERCASE | DIGIT )*;
-variable : ID;
-
 INT : DIGIT+; // check how to implement minus sign
-
-
-
 
 BOOLEANLITERAL
     :   'true'
@@ -47,15 +36,21 @@ literal :
     | 	INT 
     |   variable                   
 	|   BOOLEANLITERAL      
-    ;	
+    ;
+    LOWERCASE : [a-z]; 
+UPPERCASE :  [A-Z]; 
+DIGIT : [0-9];
+
+ID : (LOWERCASE | UPPERCASE) (LOWERCASE | UPPERCASE | DIGIT )*;
+variable : ID;
+    
 prog: (questionnaire  NEWLINE*)*;
-questionnaire : 'form'  variable '{' ( ifquestionlist|nonifquestionlist) *'}';
-nonifquestionlist : ( question)+ ;
+questionnaire : 'form'  variable '{' ( ifquestionlist|nonifquestionlist)*'}';
+nonifquestionlist : ( question  NEWLINE*)+ ;
 
-ifquestionlist : 'if'  '('  variable  ')'   '{' ( question NEWLINE*)+  '}';
- ifnested : (ifquestionlist)+;
+ifquestionlist : 'if'  '('  variable  ')' '{' ( question NEWLINE* |ifquestionlist NEWLINE*)+ NEWLINE* '}';
+
 question :  variable  ':'  questionStatement  type ;
-
 questionStatement 
        : STRING ;
 type : primitiveType;

@@ -64,16 +64,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitQuestion(@NotNull GrammarParser.QuestionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#ifnested}.
-	 * @param ctx the parse tree
-	 */
-	void enterIfnested(@NotNull GrammarParser.IfnestedContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#ifnested}.
-	 * @param ctx the parse tree
-	 */
-	void exitIfnested(@NotNull GrammarParser.IfnestedContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ORExpr}
 	 * labeled alternative in {@link GrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -172,16 +162,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitNonifquestionlist(@NotNull GrammarParser.NonifquestionlistContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariable(@NotNull GrammarParser.VariableContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariable(@NotNull GrammarParser.VariableContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#myexpr}.
 	 * @param ctx the parse tree
 	 */
@@ -191,6 +171,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMyexpr(@NotNull GrammarParser.MyexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable(@NotNull GrammarParser.VariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable(@NotNull GrammarParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#questionStatement}.
 	 * @param ctx the parse tree
